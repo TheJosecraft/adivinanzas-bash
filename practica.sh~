@@ -1,0 +1,46 @@
+#!/bin/bash
+NUMERO=$( ls | grep .txt | wc -l)
+for(( i = ; i <= $NUMERO; i = i + 1))
+do
+	LINEA=$(head -n 1 adivinanza$i.txt)
+	echo $LINEA
+
+	CONTADOR=0
+	PUNTUACION=11
+	RESPUESTA=$(head -n 2 adivinanza$i.txt | tail -n 1)
+	echo -n $RESPUESTA
+	echo ""
+
+	PALABRA=""
+	echo ""
+	while [ "$RESPUESTA" != "$PALABRA" ] && [ $CONTADOR -lt 10 ]
+	do
+		CONTADOR=$[ CONTADOR + 1 ] 
+		PISTA=$(tail -n 10 adivinanza$NUMERO.txt | head -n $CONTADOR | tail -n 1)
+		echo $PISTA
+		read -p "Introduce la respuesta: " PAL
+		PALABRA=$PAL
+		echo ""
+		PUNTUACION=$[ PUNTUACION  - 1 ]
+	done
+
+	if [ "$RESPUESTA" == "$PALABRA" ]; then
+		echo "Correcto, has acertado, has conseguido $PUNTUACION"
+	else
+		echo "La próxima vez será" 
+	fi
+	read -p "¿Quieres seguir jugando? Y/N " CONFIRMAR
+
+	if [ "$CONFIRMAR" == "Y" ]; then
+		bash practica.sh
+	elif [ "$CONFIRMAR" == "N" ]; then
+		PUNTUACIONT=$[ PUNTUACION + PUNTUACIONT ]
+		PUNTUACIONT>>puntuacion.txt
+		echo "Puntuación total: $PUNTUACIONT"
+		exit
+	else
+		echo "ERROR, INTRODUCE UN VALOR CORRECTO"
+	fi
+done
+
+
