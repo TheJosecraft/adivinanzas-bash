@@ -36,15 +36,15 @@
 	TERMINADO=0
 
 	echo "Selecciona una opción"
-	select OPCION in "Normal" "Categorías" "Aleatorio" "Ránking" "Salir"
+	select OPCION in "Normal" "Categorías" "Aleatorio" "Dos Jugadores" "Ránking" "Salir"
 	do
-		while [ "$OPCION" != "5" ]
+		while [ "$OPCION" != "6" ]
 		do
 			case $OPCION in
 				"Normal")
 	PUNTUACIONT=0
 	MODALIDAD="NORMAL"
-	CATEG="TODO "
+	CATEG="TODO"
 	for(( i = 1; i <= $NUMERO; i = i + 1))
 	do
 
@@ -113,6 +113,11 @@
 		else
 			echo "ERROR, INTRODUCE UN VALOR CORRECTO"
 		fi
+	echo ""
+	echo "Selecciona una opción"
+
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
 	break;;
 
@@ -184,11 +189,6 @@
 				read -p "¿Quieres seguir jugando? Y/N " CONFIRMAR
 			done
 
-			while [ "$CONFIRMAR" != "Y" ] && [ "$CONFIRMAR" != "N" ] 
-			do
-				read -p "¿Quieres seguir jugando? Y/N " CONFIRMAR
-			done
-
 			if [ "$CONFIRMAR" == "Y" ]; then
 				PUNTUACIONT=$[ PUNTUACION + PUNTUACIONT ]
 				echo "Buena suerte"
@@ -204,6 +204,11 @@
 			fi
 		fi
 
+	echo ""
+	echo "Selecciona una opción"
+	
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
 	break;;
 
@@ -282,6 +287,11 @@
 			fi
 		fi
 
+	echo ""
+	echo "Selecciona una opción"
+	
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
 	break;;
 
@@ -360,6 +370,11 @@
 			fi
 		fi
 
+	echo ""
+	echo "Selecciona una opción"
+	
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
 	break;;
 
@@ -438,6 +453,11 @@
 			fi
 		fi
 
+	echo ""
+	echo "Selecciona una opción"
+	
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
 	break;;
 
@@ -508,7 +528,7 @@
 			elif [ "$CONFIRMAR" == "N" ]; then
 				PUNTUACIONT=$[ PUNTUACION + PUNTUACIONT ]
 				read -p "Introduce tu nombre para guardar la puntuación: " NOMBRE
-				echo $NOMBRE "$PUNTUACIONT $MODALIDAD  $CATEG" >> $FICHPUNT
+				echo $NOMBRE "$PUNTUACIONT $MODALIDAD $CATEG" >> $FICHPUNT
 				echo "Puntuación total: $PUNTUACIONT"
 				i=$[ NUMERO + 1 ]
 			else
@@ -516,7 +536,13 @@
 			fi
 		fi
 
+	echo ""
+	echo "Selecciona una opción"
+	
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 	done
+
 	break;;
 
 	*)
@@ -531,7 +557,7 @@ break;;
 	PUNTUACIONT=0
 	CONFIRMAR="Y"
 	MODALIDAD="ALEATORIO"
-	CATEG="TODO "
+	CATEG="TODO"
 	while [ "$CONFIRMAR" == "Y" ]
 	do
 		ALEATORIO=$[RANDOM % $NUMERO +1]
@@ -597,10 +623,124 @@ break;;
 	break;;
 
 	"Ránking")
+	#echo "NOMBRE" "PUNTUACIÓN" "MODALIDAD" "CATEGORÍA"
+	#echo "$(cat $FICHPUNT)" | sort -k2 -nr 
 	printf "%-25s %-25s %-24s %-25s\n" "NOMBRE" "PUNTUACIÓN" "MODALIDAD" "CATEGORÍA"
 	printf "%-25s %-24s %-25s %-25s\n" $(cat $FICHPUNT) | sort -k2 -nr
 	break;;
+	"Dos Jugadores")
+		echo "Plata o plomo"
+		echo "Selecciona una opción"
+		select OPCIONES in "Normal" "Categorías" "Aleatorio"
+		do
+			while [ "$OPCIONES" != "3" ]
+			do
+				case $OPCIONES in
 
+				"Normal")
+	PUNTUACIONT=0
+	MODALIDAD="NORMAL"
+	CATEG="TODO"
+	
+	read -p "Introduce el nombre del Jugador 1: " J1
+	read -p "Introduce el nombre del jugador 2: " J2
+	
+	for(( i = 1; i <= $NUMERO; i = i + 1))
+	do
+
+		LINEA=$(head -n 1 adivinanza$i.txt)
+		echo $LINEA
+
+		CONTADOR=0
+		PUNTUACION=10
+		RESPUESTA=$(head -n 2 adivinanza$i.txt | tail -n 1)
+
+		echo ""
+
+		PALABRA=""
+		echo ""
+		while [ "$RESPUESTA" != "$PALABRA" ]  && [ $CONTADOR -lt 10 ]
+		do
+
+			CONTADOR=$[ $CONTADOR + 1 ] 
+
+
+			PISTA=$(tail -n 10 adivinanza$i.txt | head -n $CONTADOR | tail -n 1)
+			echo $PISTA
+
+			read -t 20 -p "Introduce la respuesta: " PAL
+
+			PALABRA=$PAL
+			echo ""
+
+			if [ "$RESPUESTA" == "$PALABRA" ]; then
+				CONTADOR=10
+			else
+				PUNTUACION=$[ PUNTUACION  - 1 ]
+			fi
+
+		done
+
+		if [ "$RESPUESTA" == "$PALABRA"]; then
+			if [ $[ $CONTADOR % 2 ] -eq 0 ]; then
+				echo "Correcto, has acertado. El jugador $J1 ha conseguido $PUNTUACION puntos"
+			else
+				echo "Correcto, has acertado. El jugador $J2 ha conseguido $PUNTUACION puntos"
+			fi
+			
+		else
+			echo "La próxima vez será"
+			echo -n "La respuesta correcta es : $RESPUESTA" 
+		fi
+
+		if [ $i == $NUMERO ]; then
+			CONFIRMAR="N"
+			echo "Lo sentimos, no hay más adivinanzas"
+		else
+			read -p "¿Quieres seguir jugando? Y/N " CONFIRMAR
+		fi
+
+		while [ "$CONFIRMAR" != "Y" ] && [ "$CONFIRMAR" != "N" ] 
+		do
+			read -p "¿Quieres seguir jugando? Y/N " CONFIRMAR
+		done
+
+		if [ "$CONFIRMAR" == "Y" ]; then
+			PUNTUACIONT=$[ PUNTUACION + PUNTUACIONT ]
+			echo "Buena suerte"
+			echo ""
+		elif [ "$CONFIRMAR" == "N" ]; then
+			PUNTUACIONT=$[ PUNTUACION + PUNTUACIONT ]
+			read -p "Introduce tu nombre para guardar la puntuación: " NOMBRE
+			echo $NOMBRE "$PUNTUACIONT $MODALIDAD $CATEG" >> $FICHPUNT
+			echo "Puntuación total: $PUNTUACIONT"
+			i=$[ NUMERO + 1 ]
+		else
+			echo "ERROR, INTRODUCE UN VALOR CORRECTO"
+		fi
+	echo ""
+	echo "Selecciona una opción"
+
+	printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
+	printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
+	done
+				break;;
+
+				"Categorías")
+
+				break;;
+
+				"Aleatorio")
+
+				break;;
+
+				*)
+					echo "Opción no válida"
+					break;;
+			esac
+			done
+		done
+		break;;
 	"Salir")
 	exit
 	break;;
