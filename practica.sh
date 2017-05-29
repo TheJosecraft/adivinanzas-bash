@@ -670,12 +670,16 @@ do
     do
 
         CONTADOR=$[ $CONTADOR + 1 ] 
-
+				MODULO=$[ PUNTUACION % 2 ]
 
         PISTA=$(tail -n 10 adivinanza$i.txt | head -n $CONTADOR | tail -n 1)
         echo $PISTA
 
-        read -t 20 -p "Introduce la respuesta: " PAL
+        if [ $MODULO -eq 0 ]; then
+					read -t 20 -p "$J1 introduce la respuesta: " PAL
+				else
+					read -t 20 -p "$J2 introduce la respuesta: " PAL
+				fi
 
         PALABRA=$PAL
         echo ""
@@ -687,7 +691,6 @@ do
         fi
 
     done
-    MODULO=$[ PUNTUACION % 2 ]
     if [ "$RESPUESTA" == "$PALABRA" ]; then
         if [ $MODULO -eq 0 ]; then
             echo "Correcto, has acertado. El jugador $J1 ha conseguido $PUNTUACION puntos"
@@ -721,11 +724,11 @@ do
         echo "Buena suerte"
         echo ""
     elif [ "$CONFIRMAR" == "N" ]; then
-        PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
-        PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
         if [ $MODULO -eq 0 ]; then
+	    			PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
             echo $J1 "$PUNTUACIONTJ1 $MODALIDAD $CATEG" >> $FICHPUNT
         else
+        		PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
             echo $J2 "$PUNTUACIONTJ2 $MODALIDAD $CATEG" >> $FICHPUNT
         fi
 
@@ -767,12 +770,18 @@ do
     do
 
         CONTADOR=$[ $CONTADOR + 1 ] 
-
+				
+				MODULO=$[ PUNTUACION % 2 ]
 
         PISTA=$(tail -n 10 adivinanza$ALEATORIO.txt | head -n $CONTADOR | tail -n 1)
         echo $PISTA
-
-        read -t 20 -p "Introduce la respuesta: " PAL
+				
+				if [ $MODULO -eq 0 ]; then
+					read -t 20 -p "$J1 introduce la respuesta: " PAL
+				else
+					read -t 20 -p "$J2 introduce la respuesta: " PAL
+				fi
+        
 
         PALABRA=$PAL
         echo ""
@@ -785,7 +794,6 @@ do
 
     done
 
-    MODULO=$[ PUNTUACION % 2 ]
     if [ "$RESPUESTA" == "$PALABRA" ]; then
         if [ $MODULO -eq 0 ]; then
             echo "Correcto, has acertado. El jugador $J1 ha conseguido $PUNTUACION puntos"
@@ -814,11 +822,11 @@ do
         echo "Buena suerte"
         echo ""
     elif [ "$CONFIRMAR" == "N" ]; then
-        PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
-        PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
         if [ $MODULO -eq 0 ]; then
+        		PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
             echo $J1 "$PUNTUACIONTJ1 $MODALIDAD $CATEG" >> $FICHPUNT
         else
+        		PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
             echo $J2 "$PUNTUACIONTJ2 $MODALIDAD $CATEG" >> $FICHPUNT
         fi
 
