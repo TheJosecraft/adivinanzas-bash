@@ -119,11 +119,11 @@ do
         echo "ERROR, INTRODUCE UN VALOR CORRECTO"
     fi
 echo ""
+done
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
 break;;
 
 "Categorías")
@@ -209,12 +209,11 @@ do
         fi
     fi
 
-echo ""
+done
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
 break;;
 
 "Arte")
@@ -291,13 +290,11 @@ do
             echo "ERROR, INTRODUCE UN VALOR CORRECTO"
         fi
     fi
-
-echo ""
+done
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
 break;;
 
 "Geografía")
@@ -374,13 +371,12 @@ do
             echo "ERROR, INTRODUCE UN VALOR CORRECTO"
         fi
     fi
-
+done
 echo ""
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
 break;;
 
 "Ciencias")
@@ -457,13 +453,12 @@ do
             echo "ERROR, INTRODUCE UN VALOR CORRECTO"
         fi
     fi
-
+done
 echo ""
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
 break;;
 
 "Programación")
@@ -540,14 +535,12 @@ do
             echo "ERROR, INTRODUCE UN VALOR CORRECTO"
         fi
     fi
-
+done
 echo ""
 echo "Selecciona una opción"
 
 printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
-done
-
 break;;
 
 *)
