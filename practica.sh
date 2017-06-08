@@ -130,7 +130,7 @@ break;;
 PUNTUACIONT=0
 MODALIDAD="CATEGORÍAS"
 echo "Selecciona una categoría"
-select CATEGORIA in "Historia" "Arte" "Geografía" "Ciencias" "Programación"
+select CATEGORIA in "Historia" "Arte" "Biología" "Ciencias" "Programación"
 do
     case $CATEGORIA in
         "Historia")
@@ -297,7 +297,7 @@ printf "%-17s %-17s %-15s\n" "1) Normal" "3) Aleatorio" "5) Ránking"
 printf "%-18s %-17s %-15s\n" "2) Categorías" "4) Dos Jugadores" "6) Salir"
 break;;
 
-"Geografía")
+"Biología")
 NUM=0
 CATEG="BIOLOGÍA"
 for(( i = 1; i <= $NUMERO; i = i + 1 ))
