@@ -5,7 +5,7 @@ FICHPUNT="puntuaciones.txt"
 #Variables de las categorías
 HIS=0
 ART=0
-GEO=0
+BIO=0
 CIE=0
 PRO=0
 
@@ -21,7 +21,7 @@ do
     fi
 
     if [ "$LINEA" == "BIOLOGÍA" ]; then
-        GEO=$[ GEO + 1 ]
+        BIO=$[ BIO + 1 ]
     fi
 
     if [ "$LINEA" == "CIENCIAS" ]; then
@@ -32,8 +32,7 @@ do
         PRO=$[ PRO + 1 ]
     fi
 done
-echo $ALEATORIO
-TERMINADO=0
+
 echo "-------------------------------INSTRUCCIONES-----------------------------------"
 echo "- 1. Asegúrate de introducir las respuestas en mayúsculas                     -"
 echo "- 2. Las respuestas contienes acentos.                                        -"
@@ -345,7 +344,7 @@ do
             echo -n "La respuesta correcta es: $RESPUESTA"
         fi
 
-        if [ $NUM -ge $GEO ]; then
+        if [ $NUM -ge $BIO ]; then
             CONFIRMAR="N"
             echo "Lo sentimos, no hay más adivinanzas"
         else
@@ -669,11 +668,16 @@ do
 
         CONTADOR=$[ $CONTADOR + 1 ] 
 
+				MODULO=$[ PUNTUACION % 2 ]
 
         PISTA=$(tail -n 10 adivinanza$i.txt | head -n $CONTADOR | tail -n 1)
         echo $PISTA
 
-        read -t 20 -p "Introduce la respuesta: " PAL
+        if [ $MODULO -eq 0 ]; then
+					read -t 20 -p "Introduce la respuesta, $J1: " PAL
+				else
+					read -t 20 -p "Introduce la respuesta, $J2: " PAL
+				fi
 
         PALABRA=$PAL
         echo ""
@@ -685,7 +689,7 @@ do
         fi
 
     done
-    MODULO=$[ PUNTUACION % 2 ]
+    
     if [ "$RESPUESTA" == "$PALABRA" ]; then
         if [ $MODULO -eq 0 ]; then
             echo "Correcto, has acertado. El jugador $J1 ha conseguido $PUNTUACION puntos"
@@ -719,11 +723,13 @@ do
         echo "Buena suerte"
         echo ""
     elif [ "$CONFIRMAR" == "N" ]; then
-        PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
-        PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
+        
+        
         if [ $MODULO -eq 0 ]; then
+        		PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
             echo $J1 "$PUNTUACIONTJ1 $MODALIDAD $CATEG" >> $FICHPUNT
         else
+        		PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
             echo $J2 "$PUNTUACIONTJ2 $MODALIDAD $CATEG" >> $FICHPUNT
         fi
 
@@ -766,12 +772,17 @@ do
 
         CONTADOR=$[ $CONTADOR + 1 ] 
 
-
+				MODULO=$[ PUNTUACION % 2 ]
+				
         PISTA=$(tail -n 10 adivinanza$ALEATORIO.txt | head -n $CONTADOR | tail -n 1)
         echo $PISTA
 
-        read -t 20 -p "Introduce la respuesta: " PAL
-
+				if [ $MODULO -eq 0 ]; then
+					read -t 20 -p "Introduce la respuesta, $J1: " PAL
+				else
+					read -t 20 -p "Introduce la respuesta, $J2: " PAL
+				fi
+				
         PALABRA=$PAL
         echo ""
 
@@ -783,7 +794,7 @@ do
 
     done
 
-    MODULO=$[ PUNTUACION % 2 ]
+    
     if [ "$RESPUESTA" == "$PALABRA" ]; then
         if [ $MODULO -eq 0 ]; then
             echo "Correcto, has acertado. El jugador $J1 ha conseguido $PUNTUACION puntos"
@@ -812,11 +823,13 @@ do
         echo "Buena suerte"
         echo ""
     elif [ "$CONFIRMAR" == "N" ]; then
-        PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
-        PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
+        
+        
         if [ $MODULO -eq 0 ]; then
+        		PUNTUACIONTJ1=$[ PUNTUACION + PUNTUACIONTJ1 ]
             echo $J1 "$PUNTUACIONTJ1 $MODALIDAD $CATEG" >> $FICHPUNT
         else
+        		PUNTUACIONTJ2=$[ PUNTUACION + PUNTUACIONTJ2 ]
             echo $J2 "$PUNTUACIONTJ2 $MODALIDAD $CATEG" >> $FICHPUNT
         fi
 
@@ -853,5 +866,4 @@ break;;
 esac
 done
 done
-
 
