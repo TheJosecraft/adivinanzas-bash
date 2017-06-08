@@ -20,7 +20,7 @@ do
         ART=$[ ART + 1 ]
     fi
 
-    if [ "$LINEA" == "GEOGRAFÍA" ]; then
+    if [ "$LINEA" == "BIOLOGÍA" ]; then
         GEO=$[ GEO + 1 ]
     fi
 
@@ -34,12 +34,12 @@ do
 done
 echo $ALEATORIO
 TERMINADO=0
-echo -------------------------------INSTRUCCIONES-----------------------------------
-echo - 1. Asegúrate de introducir las respuestas en mayúsculas                     -
-echo - 2. Las respuestas contienes acentos.                                        -
-echo - 3. Al guardar el nombre para el ránking no introduzcas espacios             -
-echo - 4. Diviértete                                                               -
-echo -------------------------------------------------------------------------------
+echo "-------------------------------INSTRUCCIONES-----------------------------------"
+echo "- 1. Asegúrate de introducir las respuestas en mayúsculas                     -"
+echo "- 2. Las respuestas contienes acentos.                                        -"
+echo "- 3. Al guardar el nombre para el ránking no introduzcas espacios             -"
+echo "- 4. Diviértete                                                               -"
+echo "-------------------------------------------------------------------------------"
 echo "Selecciona una opción"
 select OPCION in "Normal" "Categorías" "Aleatorio" "Dos Jugadores" "Ránking" "Salir"
 do
@@ -299,12 +299,12 @@ break;;
 
 "Geografía")
 NUM=0
-CATEG="GEOGRAFÍA"
+CATEG="BIOLOGÍA"
 for(( i = 1; i <= $NUMERO; i = i + 1 ))
 do
 
     LINEA=$(head -n 1 adivinanza$i.txt)
-    if [ "$LINEA" == "GEOGRAFÍA" ]; then
+    if [ "$LINEA" == "BIOLOGÍA" ]; then
         echo $LINEA
 
         CONTADOR=0
